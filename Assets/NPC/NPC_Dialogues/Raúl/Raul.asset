@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb966063c77f58340b0768cedf0ddb79, type: 3}
+  m_Name: Raul
+  m_EditorClassIdentifier: 
+  sentence: "\"Te das cuenta que nuestra mera existencia est\xE1 basada en el momento
+    que el desarrollador le dio play y que nosotros existimos y vivimos mientras este
+    est\xE9 activo?"
+  conections:
+  - {fileID: 11400000, guid: e5505739836a4e340b4dd72c132bd306, type: 2}
+  - {fileID: 11400000, guid: 0bca77823eab0e742bbc5c14e188fd31, type: 2}
+  playerResponses:
+  - '"Ammm... wtf?"'
+  - '"A que te refieres?"'
