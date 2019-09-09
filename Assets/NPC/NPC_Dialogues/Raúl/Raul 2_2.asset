@@ -15,6 +15,6 @@ MonoBehaviour:
   sentence: "\"No realmente, mi vida solo tiene sentido mientras alguien lea lo que
     estoy diciendo, sabes? Quien podr\xEDa vivir as\xED?\""
   conections:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 7487bd5f387c34249a0fc1f42e41be1b, type: 2}
   playerResponses:
   - "\"Ser\xE1 mejor que me vaya\""
