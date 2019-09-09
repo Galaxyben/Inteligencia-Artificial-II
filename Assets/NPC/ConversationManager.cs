@@ -14,14 +14,13 @@ public class ConversationManager : MonoBehaviour
 
     public int choices = 0;
     private int currentchoice = 1;
+    private Node currentConversation;
 
-    // Start is called before the first frame update
     void Start()
     {
         //conversationText.text = conversation.transform.GetChild(0).GetComponent<Text>().text;
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
 
@@ -38,6 +37,12 @@ public class ConversationManager : MonoBehaviour
                 currentchoice--;
                 Debug.Log("Current choice: " + currentchoice + " MaxChoices: " + choices);
             }
+
+            if(Input.GetKeyDown(KeyCode.KeypadEnter))
+            {
+                conversationText.text = "";
+                FollowConversation(currentConversation, currentchoice);
+            }
         }
 
     }
@@ -49,6 +54,7 @@ public class ConversationManager : MonoBehaviour
 
     public void StartConversation(Node startingNode)
     {
+        currentConversation = startingNode;
         var remainingNode = startingNode.links.Length;
         var newNode = startingNode;
         var NodeList = new List<Node>();
@@ -72,6 +78,10 @@ public class ConversationManager : MonoBehaviour
             nodeCount++;
             NodeList.Add(newNode);
         }
+    }
 
+    public void FollowConversation(Node parentNode, int response)
+    {
+        currentConversation = parentNode;
     }
 }

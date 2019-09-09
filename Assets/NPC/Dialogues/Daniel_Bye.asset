@@ -13,9 +13,5 @@ MonoBehaviour:
   m_Name: Daniel_Bye
   m_EditorClassIdentifier: 
   sentence: "Que est\xE9s bien."
-  links:
-  - {fileID: 11400000, guid: a7b39b908af06fd409df59cfd2647d03, type: 2}
-  - {fileID: 0}
-  actions:
-  - Busco una taberna.
-  - Nada, Adios.
+  links: []
+  actions: []
