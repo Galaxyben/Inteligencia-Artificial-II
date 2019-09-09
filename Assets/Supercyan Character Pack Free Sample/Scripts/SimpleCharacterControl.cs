@@ -9,6 +9,8 @@ public class SimpleCharacterControl : MonoBehaviour {
         Direct
     }
 
+    public BoxCollider interactionBox;
+
     [SerializeField] private float m_moveSpeed = 2;
     [SerializeField] private float m_turnSpeed = 200;
     [SerializeField] private float m_jumpForce = 4;
@@ -27,6 +29,8 @@ public class SimpleCharacterControl : MonoBehaviour {
 
     private bool m_wasGrounded;
     private Vector3 m_currentDirection = Vector3.zero;
+
+    public bool talking = false;
 
     private float m_jumpTimeStamp = 0;
     private float m_minJumpInterval = 0.25f;
@@ -115,23 +119,37 @@ public class SimpleCharacterControl : MonoBehaviour {
 
         bool walk = Input.GetKey(KeyCode.LeftShift);
 
-        if (v < 0) {
-            if (walk) { v *= m_backwardsWalkScale; }
-            else { v *= m_backwardRunScale; }
-        } else if(walk)
+        bool interacting = Input.GetKeyDown(KeyCode.E);
+
+        if (!talking)
         {
-            v *= m_walkScale;
+            if (interacting)
+            {
+                interactionBox.gameObject.GetComponent<BoxCollider>().enabled = true;
+            }
+            else
+            {
+                interactionBox.gameObject.GetComponent<BoxCollider>().enabled = false;
+            }
+
+            if (v < 0) {
+                if (walk) { v *= m_backwardsWalkScale; }
+                else { v *= m_backwardRunScale; }
+            } else if(walk)
+            {
+                v *= m_walkScale;
+            }
+
+            m_currentV = Mathf.Lerp(m_currentV, v, Time.deltaTime * m_interpolation);
+            m_currentH = Mathf.Lerp(m_currentH, h, Time.deltaTime * m_interpolation);
+
+            transform.position += transform.forward * m_currentV * m_moveSpeed * Time.deltaTime;
+            transform.Rotate(0, m_currentH * m_turnSpeed * Time.deltaTime, 0);
+
+            m_animator.SetFloat("MoveSpeed", m_currentV);
+
+            JumpingAndLanding();
         }
-
-        m_currentV = Mathf.Lerp(m_currentV, v, Time.deltaTime * m_interpolation);
-        m_currentH = Mathf.Lerp(m_currentH, h, Time.deltaTime * m_interpolation);
-
-        transform.position += transform.forward * m_currentV * m_moveSpeed * Time.deltaTime;
-        transform.Rotate(0, m_currentH * m_turnSpeed * Time.deltaTime, 0);
-
-        m_animator.SetFloat("MoveSpeed", m_currentV);
-
-        JumpingAndLanding();
     }
 
     private void DirectUpdate()
