@@ -24,26 +24,11 @@ public class ConversationManager : MonoBehaviour
     void Update()
     {
 
-        if (character.talking)
-        {
-            if (Input.GetKeyDown(KeyCode.DownArrow) && (currentchoice < choices))
-            {
-                currentchoice++;
-                Debug.Log("Current choice: " + currentchoice + " MaxChoices: " + choices);
-            }
-
-            if (Input.GetKeyDown(KeyCode.UpArrow) && (currentchoice > 1))
-            {
-                currentchoice--;
-                Debug.Log("Current choice: " + currentchoice + " MaxChoices: " + choices);
-            }
-
             if(Input.GetKeyDown(KeyCode.KeypadEnter))
             {
                 conversationText.text = "";
                 FollowConversation(currentConversation, currentchoice);
             }
-        }
 
     }
 
@@ -67,7 +52,7 @@ public class ConversationManager : MonoBehaviour
         {
             choices++;
             var resp = Instantiate(Response, conversationBox.transform, false);
-            resp.GetComponent<Text>().text = response.ToString();
+            resp.GetComponent<Button>().transform.GetChild(0).GetComponent<Text>().text = response.ToString();
         }
 
         int nodeCount = 0;
