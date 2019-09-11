@@ -35,22 +35,26 @@ public class ConversationManager : MonoBehaviour
         conversation.gameObject.GetComponent<Animation>().Play(animation);
     }
 
-    public void StartConversation(Node startingNode)
+    public void ShowDialogue(Node startingNode)
     {
         currentConversation = startingNode;
         var remainingNode = startingNode.links.Length;
         var newNode = startingNode;
         var NodeList = new List<Node>();
 
-        PlayAnim("cov");
+        if(!character.talking)
+            PlayAnim("cov");
         Debug.Log(startingNode.sentence);
         conversationText.text = startingNode.sentence;
-        
-        foreach(var response in startingNode.actions)
+        int contador = 0;
+
+        foreach (var response in startingNode.actions)
         {
             choices++;
             var resp = Instantiate(Response, conversationBox.transform, false);
             resp.GetComponent<Button>().transform.GetChild(0).GetComponent<Text>().text = response.ToString();
+            resp.GetComponent<Button>().onClick.AddListener(delegate { ShowDialogue(startingNode.links[contador]); });
+            contador++;
         }
 
         int nodeCount = 0;
