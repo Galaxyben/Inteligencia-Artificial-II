@@ -11,6 +11,8 @@ public class ConversationManager : MonoBehaviour
     public Image conversationBox;
     public SimpleCharacterControl character;
     public GameObject Response;
+    public int contador = 0;
+
 
     public int choices = 0;
     private int currentchoice = 1;
@@ -37,23 +39,38 @@ public class ConversationManager : MonoBehaviour
 
     public void ShowDialogue(Node startingNode)
     {
+        if (!character.talking)
+            PlayAnim("cov");
+
+        if (startingNode.links.Length == 0)
+        {
+            PlayAnim("covoff");
+            character.talking = false;
+            currentConversation = null;
+        }
+
+        contador = 0;
         currentConversation = startingNode;
         var remainingNode = startingNode.links.Length;
         var newNode = startingNode;
         var NodeList = new List<Node>();
 
-        if(!character.talking)
-            PlayAnim("cov");
+
         Debug.Log(startingNode.sentence);
         conversationText.text = startingNode.sentence;
-        int contador = 0;
+
+        foreach (Transform child in conversationBox.transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
 
         foreach (var response in startingNode.actions)
         {
+            var temp = contador;
             choices++;
             var resp = Instantiate(Response, conversationBox.transform, false);
             resp.GetComponent<Button>().transform.GetChild(0).GetComponent<Text>().text = response.ToString();
-            resp.GetComponent<Button>().onClick.AddListener(delegate { ShowDialogue(startingNode.links[contador]); });
+            resp.GetComponent<Button>().onClick.AddListener(delegate { ShowDialogue(startingNode.links[temp]); });
             contador++;
         }
 
@@ -66,6 +83,8 @@ public class ConversationManager : MonoBehaviour
             NodeList.Add(newNode);
         }
     }
+
+
 
     public void FollowConversation(Node parentNode, int response)
     {
