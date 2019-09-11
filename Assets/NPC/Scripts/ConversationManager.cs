@@ -23,13 +23,11 @@ public class ConversationManager : MonoBehaviour
     
     void Update()
     {
-
-            if(Input.GetKeyDown(KeyCode.KeypadEnter))
-            {
-                conversationText.text = "";
-                FollowConversation(currentConversation, currentchoice);
-            }
-
+        if(Input.GetKeyDown(KeyCode.KeypadEnter))
+        {
+            conversationText.text = "";
+            FollowConversation(currentConversation, currentchoice);
+        }
     }
 
     void PlayAnim(string animation)
