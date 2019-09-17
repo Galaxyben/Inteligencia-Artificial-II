@@ -10,7 +10,6 @@ public class SimpleCharacterControl : MonoBehaviour {
     }
 
     public BoxCollider interactionBox;
-
     [SerializeField] private float m_moveSpeed = 2;
     [SerializeField] private float m_turnSpeed = 200;
     [SerializeField] private float m_jumpForce = 4;

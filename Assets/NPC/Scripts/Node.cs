@@ -11,4 +11,6 @@ public class Node : ScriptableObject
 
     public string[] actions;
 
+    public bool end;
+
 }

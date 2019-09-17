@@ -12,7 +12,7 @@ public class ConversationManager : MonoBehaviour
     public SimpleCharacterControl character;
     public GameObject Response;
     public int contador = 0;
-
+    public GameObject talkingTo;
 
     public int choices = 0;
     private int currentchoice = 1;
@@ -44,6 +44,7 @@ public class ConversationManager : MonoBehaviour
 
         if (startingNode.links.Length == 0)
         {
+            talkingTo.GetComponent<Rigidbody>().AddForce(new Vector3(0, 20, 0), ForceMode.Impulse);
             PlayAnim("covoff");
             character.talking = false;
             currentConversation = null;

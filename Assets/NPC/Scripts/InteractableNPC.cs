@@ -10,6 +10,7 @@ public class InteractableNPC : MonoBehaviour
     public void StartConversation()
     {
         Camera.main.GetComponent<ConversationManager>().ShowDialogue(startingConversationRoot);
+        Camera.main.GetComponent<ConversationManager>().talkingTo = gameObject;
     }
 
 }
